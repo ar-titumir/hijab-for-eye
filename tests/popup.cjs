@@ -23,7 +23,7 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
  assert.equal(saved.at(-1).includedSites,'');assert.equal(saved.at(-1).excludedSites,'www.youtube.com');
  controls.reblurEnabled.checked=true;controls.reblurEnabled.fire('change');assert.equal(controls.reblurOptions.hidden,false);
  controls.reblurDuration.value='1000';controls.reblurDuration.fire('input');await tick();assert.equal(saved.at(-1).reblurDuration,4000);
- controls.eyeOpacity.value='500';controls.eyeOpacity.fire('input');await tick();assert.ok(saved.at(-1).eyeOpacity>50);
+ controls.eyeOpacity.value='500';controls.eyeOpacity.fire('input');await tick();assert.ok(saved.at(-1).eyeOpacity<50);
  controls.imageThreshold.value='1000';controls.imageThreshold.fire('input');await tick();assert.equal(saved.at(-1).imageThreshold,2400);
  radios[2].checked=true;radios[2].fire('change');controls.imageThreshold.value='1000';controls.imageThreshold.fire('input');await tick();assert.equal(saved.at(-1).imageThreshold,2592000);
  console.log('PASS: popup startup, site checkbox rules, current-tab add/remove, disjoint edits, conditional re-blur settings and mapped slider storage.');

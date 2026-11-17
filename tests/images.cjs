@@ -67,4 +67,28 @@ assert.equal(buttons().length,1);
 nested.height=90;apply();assert.equal(nested.hasAttribute('data-hfe-image-blurred'),false);
 assert.equal(nested.style.getPropertyValue('filter'),'brightness(.8)');
 settings.imageThreshold=80;apply();assert.equal(nested.hasAttribute('data-hfe-image-blurred'),true);
+// Model browser CSSOM rounding: 11.600000000000001px becomes 11.6px.
+settings.enabled=false;apply();
+const originalSet=nested.style.setProperty;let filterWrites=0;
+nested.style.setProperty=function(k,v,p=''){
+  if(k==='filter'){filterWrites++;v=v.replace(/blur\(([\d.]+)px\)/,(_,n)=>`blur(${Number(Number(n).toFixed(6))}px)`);}
+  originalSet.call(this,k,v,p);
+};
+settings.enabled=true;settings.imageStrength=29;apply();
+assert.equal(nested.style.getPropertyValue('filter'),'blur(11.6px)');
+const writes=filterWrites;apply();assert.equal(filterWrites,writes,'No repeated style writes after CSSOM rounding');
+// A closed shadow root retargets a hit on an icon to its host. The host
+// must be hidden while checking the image underneath, including after reveal.
+document.elementFromPoint=()=>root.children[0].style.getPropertyValue('display')==='none'?host:root.children[0];
+apply();assert.equal(buttons().length,1);
+buttons()[0].listeners.click({preventDefault(){},stopPropagation(){}});apply();
+assert.equal(nested.style.getPropertyValue('filter'),'brightness(.8)');
+assert.equal(buttons()[0].attrs['aria-label'],'Blur image again');
+assert.equal(root.children[0].style.getPropertyValue('display'),'');
+apply();assert.equal(buttons().length,1,'Re-blur button survives subsequent visibility checks');
+buttons()[0].listeners.click({preventDefault(){},stopPropagation(){}});apply();
+assert.equal(nested.style.getPropertyValue('filter'),'blur(11.6px)');
+buttons()[0].listeners.click({preventDefault(){},stopPropagation(){}});apply();
+advance(2001);assert.equal(buttons().length,0);
+assert.equal(nested.style.getPropertyValue('filter'),'brightness(.8)');
 console.log('PASS: thresholds, reveals, timed re-blur, source changes, resize, opacity, cleanup, dynamic open-shadow images and original-filter restoration.');

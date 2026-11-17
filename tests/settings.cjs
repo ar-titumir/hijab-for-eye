@@ -9,7 +9,7 @@ for(const reverse of [false,true]){
   let previous=-1;for(let p=0;p<=1000;p++){const v=api.fromSlider(p,0,100,reverse);assert.ok(v>=previous);previous=v;}
   for(let v=0;v<=100;v++)assert.ok(Math.abs(api.fromSlider(api.toSlider(v,0,100,reverse),0,100,reverse)-v)<=1);
 }
-assert.ok(api.fromSlider(500,0,100)<50);assert.ok(api.fromSlider(500,0,100,true)>50);
+assert.ok(api.fromSlider(500,0,100)>50);assert.ok(api.fromSlider(500,0,100,true)<50);
 assert.equal(api.fromSlider(1000,12,100),100);assert.equal(api.fromSlider(1000,0,4000),4000);
 const rules=api.normalize({...api.defaults,siteAll:false,siteOnly:true,includedSites:'youtube.com, https://Example.com/path',excludedSites:'www.youtube.com, elsewhere.com'});
 assert.equal(rules.includedSites,'youtube.com, example.com');assert.equal(rules.excludedSites,'elsewhere.com');

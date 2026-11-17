@@ -5,11 +5,11 @@ globalThis.MediaBlur = Object.freeze({
   uncurve(value) { return Math.log1p(Math.max(0,Math.min(1,value)) * Math.expm1(4)) / 4; },
   fromSlider(position,min,max,reverse=false) {
     const p = Number(position)/1000;
-    return Math.round(min+(max-min)*(reverse ? 1-this.curve(1-p) : this.curve(p)));
+    return Math.round(min+(max-min)*(reverse ? this.curve(p) : 1-this.curve(1-p)));
   },
   toSlider(value,min,max,reverse=false) {
     const p = Math.max(0,Math.min(1,(value-min)/(max-min)));
-    return Math.round(1000*(reverse ? 1-this.uncurve(1-p) : this.uncurve(p)));
+    return Math.round(1000*(reverse ? this.uncurve(p) : 1-this.uncurve(1-p)));
   },
   thresholdMax(mode,display=globalThis.screen) {
     const width = display?.width || 1920, height = display?.height || 1080;

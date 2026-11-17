@@ -29,8 +29,11 @@ globalThis.HFEImages = (() => {
     const filter=`blur(${settings.imageStrength*.4}px)`;
     const current=el.style.getPropertyValue('filter');
     if(entry.applied===null||current!==entry.applied){entry.previous=current;entry.priority=el.style.getPropertyPriority('filter');}
-    if(current!==filter||el.style.getPropertyPriority('filter')!=='important')el.style.setProperty('filter',filter,'important');
-    entry.applied=filter;
+    if(entry.requested!==filter||current!==entry.applied||el.style.getPropertyPriority('filter')!=='important')el.style.setProperty('filter',filter,'important');
+    entry.requested=filter;
+    // CSSOM can round fractional pixels. Remember the value actually stored by
+    // the browser so restore() recognizes our filter at every blur strength.
+    entry.applied=el.style.getPropertyValue('filter');
     if(!el.hasAttribute('data-hfe-image-blurred'))el.setAttribute('data-hfe-image-blurred','');
   }
   function clearButton(entry){entry.button?.remove();entry.button=null;}
@@ -45,6 +48,9 @@ globalThis.HFEImages = (() => {
     });shadow.append(button);return button;
   }
   function update(){
+    // Exclude the entire closed-shadow overlay from hit testing. Disabling
+    // only its buttons can still expose their SVG children as hit targets.
+    overlay.style.setProperty('display','none','important');
     for(const entry of entries.values())if(entry.button)entry.button.style.pointerEvents='none';
     for(const [el,entry]of entries)if(!el.isConnected){clearTimeout(entry.timer);clearButton(entry);restore(el,entry);resize.unobserve(el);entries.delete(el);}
     for(const [root,observer]of observers)if(root.host&&!root.host.isConnected){observer.disconnect();observers.delete(root);}
@@ -75,6 +81,7 @@ globalThis.HFEImages = (() => {
       button.style.setProperty('--size',`${reblur?settings.reblurSize:settings.eyeSize}px`);
     }
     for(const entry of entries.values())if(entry.button)entry.button.style.pointerEvents='';
+    overlay.style.removeProperty('display');
   }
   function start(){
     if(shadow||!document.documentElement)return;

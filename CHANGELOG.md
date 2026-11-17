@@ -1,5 +1,13 @@
 # Version history
 
+## v2.3.1 - November 17, 2026
+
+- Fix image reveal restoration when browsers round fractional CSS blur values.
+- Exclude the eye overlay from image visibility checks to prevent self-obstruction.
+- Reverse all exponential slider curves, including per-video blur. Existing saved values and limits are preserved.
+- Clarify that Chrome and Edge keep separate settings for the optional re-blur button.
+- Add regression tests for CSS rounding, repeated updates, and overlay hit testing.
+
 ## v2.3.0 — November 17, 2026
 
 - Exponential sliders for blur, thresholds, icon size, and durations; reversed curves for finer opacity adjustment near 100%.
