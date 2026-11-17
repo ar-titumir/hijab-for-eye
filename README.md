@@ -1,5 +1,13 @@
 # hijab-for-eye — Chrome and Edge
 
+## New in 2.1.0
+
+Image blur now filters by displayed Width, Height, or Area (width × height). Only images strictly greater than the selected threshold are blurred. The default is width greater than 200 CSS pixels. Width/height thresholds range from 0–4,000 px; area ranges from 0–4,000,000 px².
+
+Each eligible visible image gets a centered eye button. Click it to reveal that image until the page reloads; changing the image source resets its reveal. The eye opacity is adjustable from 0–100% (default 70%); hover and keyboard focus show the button fully. Resize, load, and scroll events update image eligibility and button positions. Eye buttons may not appear in fullscreen/top-layer content or custom overlays.
+
+To update an unpacked installation, replace its files or use the updated source folder, click Reload on the extension card, then refresh website tabs.
+
 Separate 0–100% blur controls for videos and images across HTTP and HTTPS websites. Settings apply globally to all tabs and are saved on this device. Video blur starts enabled at 50%; image blur starts off. The master switch pauses both without resetting strengths.
 
 ## Install
@@ -37,4 +45,5 @@ Run the dependency-free checks with Node.js:
 
 ```sh
 node tests/test.cjs
+node tests/images.cjs
 ```

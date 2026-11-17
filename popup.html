@@ -25,9 +25,23 @@
       <div class="level-row"><label for="imageStrength">Image strength</label><output id="imageValue" for="imageStrength">50%</output></div>
       <input id="imageStrength" type="range" min="0" max="100" step="1" value="50" disabled>
       <div class="scale"><span>Clear</span><span>Softest</span></div>
+      <fieldset id="imageFilter">
+        <legend>Filter images by</legend>
+        <div class="segments">
+          <label><input type="radio" name="filterBy" value="width" checked disabled><span>Width</span></label>
+          <label><input type="radio" name="filterBy" value="height" disabled><span>Height</span></label>
+          <label><input type="radio" name="filterBy" value="area" disabled><span>Area</span></label>
+        </div>
+      </fieldset>
+      <div class="level-row"><label for="imageThreshold">Blur if greater than</label><output id="thresholdValue" for="imageThreshold">200 px</output></div>
+      <input id="imageThreshold" type="range" min="0" max="4000" step="1" value="200" disabled>
+      <p class="hint" id="thresholdHint">Displayed image width in pixels.</p>
+      <div class="level-row"><label for="eyeOpacity">Eye icon opacity</label><output id="eyeValue" for="eyeOpacity">70%</output></div>
+      <input id="eyeOpacity" type="range" min="0" max="100" step="1" value="70" disabled>
+      <p class="hint">Click the eye on a blurred image to reveal it until the page reloads. At 0%, the button appears on hover or keyboard focus.</p>
     </section>
     <p id="status" role="status">Loading settings…</p>
-    <p class="footnote">Applies to all supported websites and open tabs. Images include thumbnails and logos. Browser pages and some custom players are excluded.</p>
+    <p class="footnote">Applies across supported websites. Only images above the selected displayed-size threshold are blurred.</p>
   </main>
 </body>
 </html>

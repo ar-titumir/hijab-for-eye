@@ -13,6 +13,8 @@ hijab-for-eye lets you soften videos and images while browsing. Choose separate 
 
 Features:
 - Independent 0–100% blur controls for videos and images.
+- Filter images by displayed width, height, or area with an adjustable threshold.
+- Reveal individual blurred images using a centered eye button with adjustable opacity.
 - Enable videos, images, or both.
 - Saved local preferences applied across supported websites and open tabs.
 - Works with standard HTML videos, images, animated GIFs, and dynamically added media.
@@ -35,7 +37,7 @@ Limitations: browser internal pages, extension stores, CSS background images, ca
 ## Privacy declarations
 Single purpose: Let users adjust visual blur on video and image elements while browsing supported websites.
 
-Storage justification: Save the user's on/off preference, selected media types, and blur strength on the device across browser sessions.
+Storage justification: Save the user's on/off preference, selected media types, blur strengths, image size filter and threshold, and eye icon opacity on the device across browser sessions.
 
 Website access justification: Content scripts run on HTTP and HTTPS websites and matching embedded frames to apply the user-selected CSS blur to media elements. Access is needed across sites because this is a general-purpose media blur extension. No page content is collected or transmitted.
 

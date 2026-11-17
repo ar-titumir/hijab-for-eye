@@ -8,7 +8,7 @@ function setup(delayed = false) {
   const root = { style: { setProperty: (k,v) => styles[k] = v }, setAttribute: (k,v) => attrs[k] = v, removeAttribute: k => delete attrs[k] };
   const document = { documentElement: delayed ? null : root };
   let change, resolve, mutation;
-  const context = vm.createContext({ document,
+  const context = vm.createContext({ document, HFEImages: { apply() {} },
     MutationObserver: class { constructor(fn) { mutation = fn; } observe() {} disconnect() {} },
     chrome: { storage: { local: { get: () => new Promise(r => resolve = r) }, onChanged: { addListener: fn => change = fn } } }
   });
@@ -42,7 +42,7 @@ function setup(delayed = false) {
   assert.equal(y.styles['--media-blur-image-radius'], '32px');
   const manifest = JSON.parse(fs.readFileSync(base + 'manifest.json'));
   for (const script of manifest.content_scripts) for (const file of [...script.js,...script.css]) assert.ok(fs.existsSync(base+file));
-  for (const file of ['settings.js','content.js','popup.js']) new vm.Script(fs.readFileSync(base+file,'utf8'));
+  for (const file of ['settings.js','images.js','content.js','popup.js']) new vm.Script(fs.readFileSync(base+file,'utf8'));
   assert.ok(fs.existsSync(base+manifest.action.default_popup));
   console.log('PASS: independent strengths, category isolation, master pause, zero, storage area isolation, bounds, concurrent startup changes, delayed DOM, syntax and manifest resources.');
 })().catch(e => { console.error(e); process.exitCode = 1; });

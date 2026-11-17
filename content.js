@@ -6,6 +6,7 @@
   function apply() {
     const root = document.documentElement;
     if (!root) return;
+    HFEImages.apply(settings);
     for (const [kind, strength] of [['videos', 'videoStrength'], ['images', 'imageStrength']]) {
       const singular = kind === 'videos' ? 'video' : 'image';
       root.style.setProperty(`--media-blur-${singular}-radius`, `${settings[strength] * 0.4}px`);

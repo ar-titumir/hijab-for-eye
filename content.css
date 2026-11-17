@@ -1,8 +1,6 @@
 html[data-media-blur-videos="on"] video {
   filter: blur(var(--media-blur-video-radius, 20px)) !important;
 }
-html[data-media-blur-images="on"] img,
-html[data-media-blur-images="on"] input[type="image"],
-html[data-media-blur-images="on"] svg image {
+html[data-media-blur-images="on"] [data-hfe-image-blurred] {
   filter: blur(var(--media-blur-image-radius, 20px)) !important;
 }

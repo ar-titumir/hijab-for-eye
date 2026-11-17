@@ -8,7 +8,7 @@ hijab-for-eye applies adjustable visual blur to standard video and image element
 
 The extension does not collect, transmit, sell, or share personal information, browsing history, website content, or media. It does not use analytics, advertising, remote servers, or remote executable code.
 
-The extension stores only its settings (enabled/disabled, video and image toggles, and blur strengths) using the browser's local extension storage. These preferences remain on the device and are not synchronized by the extension. Removing the extension removes its extension storage.
+The extension stores only its settings (enabled/disabled, video and image toggles, blur strengths, image size filter and threshold, and eye icon opacity) using the browser's local extension storage. These preferences remain on the device and are not synchronized by the extension. Removing the extension removes its extension storage. Individual image reveals and source identifiers are held temporarily in page memory to keep an image revealed and reset it when its source changes; they are not persisted or transmitted.
 
 ## Website access
 

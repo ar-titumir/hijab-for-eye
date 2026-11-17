@@ -1,4 +1,15 @@
 :root { color-scheme: dark; font-family: "Segoe UI", system-ui, sans-serif; background: #141823; color: #f2f5fc; }
+body { max-height: 590px; overflow-y: auto; }
+fieldset { border: 0; padding: 0; margin: 20px 0 0; }
+legend { font-size: 13px; margin-bottom: 10px; }
+.segments { display: flex; gap: 4px; background: #202737; border-radius: 8px; padding: 4px; }
+.segments label { flex: 1; position: relative; cursor: pointer; }
+.segments input { position: absolute; opacity: 0; }
+.segments span { display: block; padding: 8px 0; text-align: center; font-size: 12px; border-radius: 5px; }
+.segments input:checked + span { background: #657ce5; color: white; }
+.segments input:focus-visible + span { outline: 2px solid white; }
+.hint { font-size: 11px; color: #aeb9ce; line-height: 1.5; margin: 6px 0; }
+#thresholdValue { font-size: 17px; }
 * { box-sizing: border-box; }
 body { margin: 0; width: 320px; }
 main { padding: 24px; }
