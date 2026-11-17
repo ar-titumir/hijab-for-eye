@@ -3,13 +3,13 @@ globalThis.MediaBlur = Object.freeze({
   defaults:HFE_DEFAULTS,
   curve(position) { return Math.expm1(4 * Math.max(0,Math.min(1,position))) / Math.expm1(4); },
   uncurve(value) { return Math.log1p(Math.max(0,Math.min(1,value)) * Math.expm1(4)) / 4; },
-  fromSlider(position,min,max,reverse=false) {
+  fromSlider(position,min,max) {
     const p = Number(position)/1000;
-    return Math.round(min+(max-min)*(reverse ? this.curve(p) : 1-this.curve(1-p)));
+    return Math.round(min+(max-min)*this.curve(p));
   },
-  toSlider(value,min,max,reverse=false) {
+  toSlider(value,min,max) {
     const p = Math.max(0,Math.min(1,(value-min)/(max-min)));
-    return Math.round(1000*(reverse ? this.uncurve(p) : 1-this.uncurve(1-p)));
+    return Math.round(1000*this.uncurve(p));
   },
   thresholdMax(mode,display=globalThis.screen) {
     const width = display?.width || 1920, height = display?.height || 1080;

@@ -1,16 +1,16 @@
 const $ = id => document.getElementById(id);
 const ranges = {
-  videoStrength:[0,100,'%'],imageStrength:[0,100,'%'],eyeSize:[12,100,' px'],eyeOpacity:[0,100,'%',true],
-  reblurSize:[12,100,' px'],reblurOpacity:[0,100,'%',true],reblurDuration:[0,4000,' ms'],
-  videoEyeSize:[12,100,' px'],videoEyeOpacity:[0,100,'%',true],videoPanelOpacity:[0,100,'%',true],videoHideDelay:[0,4000,' ms'],imageThreshold:[0,1,' px']
+  videoStrength:[0,100,'%'],imageStrength:[0,100,'%'],eyeSize:[12,100,' px'],eyeOpacity:[0,100,'%'],
+  reblurSize:[12,100,' px'],reblurOpacity:[0,100,'%'],reblurDuration:[0,4000,' ms'],
+  videoEyeSize:[12,100,' px'],videoEyeOpacity:[0,100,'%'],videoPanelOpacity:[0,100,'%'],videoHideDelay:[0,4000,' ms'],imageThreshold:[0,1,' px']
 };
 const flags = Object.keys(MediaBlur.defaults).filter(key=>typeof MediaBlur.defaults[key]==='boolean');
 const modes=[...document.querySelectorAll('[name="filterBy"]')];
 let state={...MediaBlur.defaults}, ready=false, currentHost='', writes=Promise.resolve(), updateId=0;
 function render() {
   ranges.imageThreshold=[0,MediaBlur.thresholdMax(state.filterBy),state.filterBy==='area'?' px²':' px'];
-  for(const [key,[min,max,unit,reverse]] of Object.entries(ranges)) {
-    $(key).value=MediaBlur.toSlider(state[key],min,max,reverse);
+  for(const [key,[min,max,unit]] of Object.entries(ranges)) {
+    $(key).value=MediaBlur.toSlider(state[key],min,max);
     $(key).disabled=!ready;
     const text=state[key].toLocaleString()+unit;
     $(key+'Value').textContent=text; $(key).setAttribute('aria-valuetext',text);
@@ -40,7 +40,7 @@ function save() {
   writes.then(()=>{if(id===updateId)$('status').textContent='Settings saved on this device';}).catch(()=>{if(id===updateId)$('status').textContent='Could not save. Adjust a setting to retry.';});
 }
 for(const [key,spec] of Object.entries(ranges)) $(key).addEventListener('input',()=>{
-  const [min,max,,reverse]=ranges[key];state[key]=MediaBlur.fromSlider($(key).value,min,max,reverse);save();
+  const [min,max]=ranges[key];state[key]=MediaBlur.fromSlider($(key).value,min,max);save();
 });
 for(const key of flags) $(key).addEventListener('change',()=>{state[key]=$(key).checked;if(key==='siteOnly'&&state.siteOnly){state.siteAll=false;state.siteExclude=false;}save();});
 for(const radio of modes) radio.addEventListener('change',()=>{

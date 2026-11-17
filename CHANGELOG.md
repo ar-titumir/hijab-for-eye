@@ -1,5 +1,12 @@
 # Version history
 
+## v2.3.2 - November 17, 2026
+
+- Use one accelerating exponential curve for every slider: slow increases at the start, gradually faster increases toward the maximum. Includes opacity and temporary per-video blur.
+- Preserve saved values, limits, and the image reveal fix from v2.3.1.
+- Remove reverse-curve options and verify accelerating increments across supported ranges.
+
+
 ## v2.3.1 - November 17, 2026
 
 - Fix image reveal restoration when browsers round fractional CSS blur values.

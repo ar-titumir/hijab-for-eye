@@ -25,7 +25,7 @@ Video blur starts at 50%; image blur starts off. Image blur includes thumbnails 
 
 Limitations: browser internal pages, extension stores, CSS background images, canvas/WebGL content, closed shadow-root images and shadow-root videos, and native picture-in-picture are not supported. Blur is a visual effect, not a guarantee that content is hidden. Native video controls may also be blurred.
 
-New in v2.3.1: exponential blur, size and duration controls; opacity sliders with fine adjustment near 100%; display-based image thresholds; configurable image eye size; a temporary re-blur button; automatic video-panel dismissal; and per-site include/exclude rules. Created by ar-titumir. MIT licensed.
+New in v2.3.2: exponential blur, size and duration controls; opacity sliders with fine adjustment near 0%; display-based image thresholds; configurable image eye size; a temporary re-blur button; automatic video-panel dismissal; and per-site include/exclude rules. Created by ar-titumir. MIT licensed.
 
 ## Listing fields
 - Language: English
@@ -55,6 +55,6 @@ User data collection: None. Only local extension preferences are stored.
 ## Submission steps
 1. Register or sign in at https://chrome.google.com/webstore/devconsole. New developers must accept Google's agreement and pay the one-time registration fee. Complete any requested account verification yourself.
 2. Test the extension on real sites, then capture at least one genuine 1280 × 800 screenshot showing its controls and effect.
-3. Add a new item and upload `hijab-for-eye-v2.3.1.zip` (manifest is at the ZIP root).
+3. Add a new item and upload `hijab-for-eye-v2.3.2.zip` (manifest is at the ZIP root).
 4. Complete the listing and privacy fields using the text above, add the icon and screenshot, and select Public distribution.
 5. Review the final declarations, then submit for Google's review. It is not searchable in the store until Google approves and publishes it.
