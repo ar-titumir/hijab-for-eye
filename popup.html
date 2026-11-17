@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>hijab-for-eye</title>
+  <link rel="stylesheet" href="popup.css">
+  <script src="settings.js" defer></script>
+  <script src="popup.js" defer></script>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">LESS DETAIL. MORE CONTROL.</p>
+    <h1>hijab-for-eye</h1>
+    <p class="intro">Soften videos and images across the web.</p>
+    <label class="toggle-row" for="enabled"><span>Enable blur</span><input id="enabled" type="checkbox" role="switch" disabled></label>
+    <section aria-label="Video blur">
+      <label class="media-label"><input id="videos" type="checkbox" disabled> Blur videos</label>
+      <div class="level-row"><label for="videoStrength">Video strength</label><output id="videoValue" for="videoStrength">50%</output></div>
+      <input id="videoStrength" type="range" min="0" max="100" step="1" value="50" disabled>
+      <div class="scale"><span>Clear</span><span>Softest</span></div>
+    </section>
+    <section aria-label="Image blur">
+      <label class="media-label"><input id="images" type="checkbox" disabled> Blur images</label>
+      <div class="level-row"><label for="imageStrength">Image strength</label><output id="imageValue" for="imageStrength">50%</output></div>
+      <input id="imageStrength" type="range" min="0" max="100" step="1" value="50" disabled>
+      <div class="scale"><span>Clear</span><span>Softest</span></div>
+    </section>
+    <p id="status" role="status">Loading settings…</p>
+    <p class="footnote">Applies to all supported websites and open tabs. Images include thumbnails and logos. Browser pages and some custom players are excluded.</p>
+  </main>
+</body>
+</html>

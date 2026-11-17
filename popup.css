@@ -1,0 +1,24 @@
+:root { color-scheme: dark; font-family: "Segoe UI", system-ui, sans-serif; background: #141823; color: #f2f5fc; }
+* { box-sizing: border-box; }
+body { margin: 0; width: 320px; }
+main { padding: 24px; }
+.eyebrow { margin: 0 0 10px; color: #9caeff; font-size: 10px; font-weight: 700; letter-spacing: 1.6px; }
+h1 { margin: 0; font-size: 25px; letter-spacing: -.7px; }
+.intro { margin: 8px 0 24px; color: #aeb9ce; font-size: 13px; }
+.toggle-row { display: flex; align-items: center; justify-content: space-between; background: #202737; border: 1px solid #334057; border-radius: 12px; padding: 14px; font-weight: 600; font-size: 14px; cursor: pointer; }
+#enabled { appearance: none; margin: 0; width: 38px; height: 22px; border-radius: 20px; background: #596276; position: relative; cursor: pointer; }
+#enabled::after { content: ""; position: absolute; width: 16px; height: 16px; background: white; border-radius: 50%; left: 3px; top: 3px; transition: transform .15s; }
+#enabled:checked { background: #728bff; }
+#enabled:checked::after { transform: translateX(16px); }
+.level-row { margin-top: 25px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; }
+output { color: #bac7ff; font-size: 25px; font-weight: 650; font-variant-numeric: tabular-nums; }
+#percentage { width: 100%; margin: 18px 0 8px; accent-color: #8ca0ff; cursor: pointer; }
+input:focus-visible { outline: 2px solid #c4ceff; outline-offset: 4px; }
+.scale { display: flex; justify-content: space-between; font-size: 11px; color: #aeb9ce; }
+#status { min-height: 18px; margin: 22px 0 14px; color: #bac7ff; font-size: 12px; }
+.footnote { border-top: 1px solid #30394d; padding-top: 14px; margin: 0; line-height: 1.6; font-size: 11px; color: #aeb9ce; }
+section { margin-top: 20px; border-top: 1px solid #30394d; padding-top: 16px; }
+.media-label { display: flex; gap: 8px; align-items: center; font-size: 14px; font-weight: 600; cursor: pointer; }
+.media-label input { accent-color: #8ca0ff; }
+section .level-row { margin-top: 12px; }
+input[type="range"] { width: 100%; margin: 14px 0 8px; accent-color: #8ca0ff; cursor: pointer; }

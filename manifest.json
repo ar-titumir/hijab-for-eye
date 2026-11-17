@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "hijab-for-eye",
+  "version": "2.0.0",
+  "description": "Adjust video and image blur across websites with separate saved controls.",
+  "permissions": ["storage"],
+  "action": { "default_title": "hijab-for-eye", "default_popup": "popup.html" },
+  "content_scripts": [{
+    "matches": ["http://*/*", "https://*/*"],
+    "js": ["settings.js", "content.js"],
+    "css": ["content.css"],
+    "run_at": "document_start",
+    "all_frames": true,
+    "match_origin_as_fallback": true
+  }]
+}
