@@ -6,14 +6,15 @@
   function apply() {
     const root = document.documentElement;
     if (!root) return;
-    HFEImages.apply(settings);
-    HFEVideos.apply(settings);
-    if (settings.enabled && settings.videos) root.setAttribute('data-hfe-video-controls', 'on');
+    const active = { ...settings, enabled: settings.enabled && MediaBlur.siteAllowed(MediaBlur.pageHost(), settings) };
+    HFEImages.apply(active);
+    HFEVideos.apply(active);
+    if (active.enabled && settings.videos) root.setAttribute('data-hfe-video-controls', 'on');
     else root.removeAttribute('data-hfe-video-controls');
     for (const [kind, strength] of [['videos', 'videoStrength'], ['images', 'imageStrength']]) {
       const singular = kind === 'videos' ? 'video' : 'image';
       root.style.setProperty(`--media-blur-${singular}-radius`, `${settings[strength] * 0.4}px`);
-      if (settings.enabled && settings[kind] && settings[strength] > 0) {
+      if (active.enabled && settings[kind] && settings[strength] > 0) {
         root.setAttribute(`data-media-blur-${kind}`, 'on');
       } else {
         root.removeAttribute(`data-media-blur-${kind}`);

@@ -1,5 +1,19 @@
 # Version history
 
+## v2.3.0 — November 17, 2026
+
+- Exponential sliders for blur, thresholds, icon size, and durations; reversed curves for finer opacity adjustment near 100%.
+- Image thresholds now use the browser-reported display width, height, or area × 1.25 as their maximum.
+- Image eye and re-blur icon sizes are adjustable up to 100 px. Video eye size also supports 100 px.
+- Optional **Show re-blur button**, with size, opacity, and visible duration (up to 4,000 ms).
+- Video slider panels close after a configurable delay outside the video/controls, on outside click, or with Escape.
+- All-sites, only-listed-sites, and exclusion-list controls, with current-tab add/remove buttons and disjoint domain lists.
+- Image detection rescans after YouTube navigation, covers images in open shadow roots, and restores original inline filters when blur is removed.
+- Small YouTube sidebar thumbnails remain subject to the chosen size threshold; lowering it is necessary when their displayed dimensions are below it.
+- Added MIT license and ar-titumir's requested name/email credit.
+- Includes the per-video controls prepared in v2.2.0; that version was not published because GitHub approval review was unavailable.
+- Expanded plain-language documentation and automated settings, popup, image, and video tests. Live browser verification remains outstanding.
+
 ## v2.2.0 — November 17, 2026
 
 - Added an eye button at the top center of each supported video.

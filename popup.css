@@ -36,3 +36,14 @@ section { margin-top: 20px; border-top: 1px solid #30394d; padding-top: 16px; }
 .media-label input { accent-color: #8ca0ff; }
 section .level-row { margin-top: 12px; }
 input[type="range"] { width: 100%; margin: 14px 0 8px; accent-color: #8ca0ff; cursor: pointer; }
+.credit { text-align:right; font-size:9px; line-height:1.45; margin:-12px 0 12px; color:#9eabc5; }
+.credit a { color:inherit; text-decoration:none; }
+.credit a:hover { text-decoration:underline; }
+output { font-size:18px; }
+input[type="text"] { width:100%; background:#202737; color:#f2f5fc; border:1px solid #46516b; border-radius:6px; padding:9px; margin:8px 0; }
+.site-buttons { display:flex; gap:6px; margin-bottom:16px; }
+.site-buttons button { background:#303b5a; border:1px solid #52638f; border-radius:5px; padding:6px; font:11px "Segoe UI",sans-serif; color:white; cursor:pointer; }
+button:disabled,input:disabled { opacity:.45; cursor:default; }
+details .media-label { margin-top:14px; }
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+[hidden] { display:none!important; }

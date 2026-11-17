@@ -23,7 +23,9 @@ Features:
 
 Video blur starts at 50%; image blur starts off. Image blur includes thumbnails and logos. Audio and playback continue normally.
 
-Limitations: browser internal pages, extension stores, CSS background images, canvas/WebGL content, shadow DOM media, and native picture-in-picture are not supported. Blur is a visual effect, not a guarantee that content is hidden. Native video controls may also be blurred.
+Limitations: browser internal pages, extension stores, CSS background images, canvas/WebGL content, closed shadow-root images and shadow-root videos, and native picture-in-picture are not supported. Blur is a visual effect, not a guarantee that content is hidden. Native video controls may also be blurred.
+
+New in v2.3.0: exponential blur, size and duration controls; opacity sliders with fine adjustment near 100%; display-based image thresholds; configurable image eye size; a temporary re-blur button; automatic video-panel dismissal; and per-site include/exclude rules. Created by ar-titumir. MIT licensed.
 
 ## Listing fields
 - Language: English
@@ -42,6 +44,10 @@ Storage justification: Save the user's on/off preference, selected media types, 
 
 Website access justification: Content scripts run on HTTP and HTTPS websites and matching embedded frames to apply the user-selected CSS blur to media elements. Access is needed across sites because this is a general-purpose media blur extension. No page content is collected or transmitted.
 
+ActiveTab justification: Read the current tab hostname when the user opens the popup, solely to add or remove that website from the local include/exclude lists.
+
+Additional local storage: image eye size, re-blur size/opacity/duration, video hide delay, website mode and domain lists.
+
 Remote code: No. All executable code is included in the extension package.
 
 User data collection: None. Only local extension preferences are stored.
@@ -49,6 +55,6 @@ User data collection: None. Only local extension preferences are stored.
 ## Submission steps
 1. Register or sign in at https://chrome.google.com/webstore/devconsole. New developers must accept Google's agreement and pay the one-time registration fee. Complete any requested account verification yourself.
 2. Test the extension on real sites, then capture at least one genuine 1280 × 800 screenshot showing its controls and effect.
-3. Add a new item and upload `hijab-for-eye-v2.2.0.zip` (manifest is at the ZIP root).
+3. Add a new item and upload `hijab-for-eye-v2.3.0.zip` (manifest is at the ZIP root).
 4. Complete the listing and privacy fields using the text above, add the icon and screenshot, and select Public distribution.
 5. Review the final declarations, then submit for Google's review. It is not searchable in the store until Google approves and publishes it.

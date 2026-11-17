@@ -10,6 +10,8 @@ The extension does not collect, transmit, sell, or share personal information, b
 
 The extension stores only its settings (enabled/disabled, video and image toggles, blur strengths, image size filter and threshold, and eye icon opacity) using the browser's local extension storage. These preferences remain on the device and are not synchronized by the extension. Removing the extension removes its extension storage. Individual image reveals and source identifiers are held temporarily in page memory to keep an image revealed and reset it when its source changes; they are not persisted or transmitted.
 
+Image eye size, re-blur preferences and duration, video auto-hide delay, and the user-entered include/exclude website lists are also saved locally. The extension reads the current tab URL when the popup is opened to support adding or removing its hostname from a site list. It does not record browsing history. Site rules are evaluated locally against the top-level page hostname, including embedded frames.
+
 ## Website access
 
 Video eye size, video eye opacity, and video slider panel opacity are also stored locally as preferences. Temporary per-video blur adjustments and source identifiers exist only in the page's memory; they are not saved to extension storage or transmitted.
@@ -20,4 +22,4 @@ Users can turn the extension off, adjust its settings, restrict site access thro
 
 ## Contact
 
-For privacy questions, open an issue at https://github.com/ar-titumir/hijab-for-eye/issues. Do not post private information in a public issue. GitHub's own privacy policy governs information you choose to submit there.
+For privacy questions, email azizureee19@gmail.com or open an issue at https://github.com/ar-titumir/hijab-for-eye/issues. Do not post private information in a public issue. GitHub's own privacy policy governs information you choose to submit there.

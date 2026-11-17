@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
   "name": "hijab-for-eye",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
   "description": "Adjust video and image blur across websites with separate saved controls.",
-  "permissions": ["storage"],
+  "permissions": ["storage", "activeTab"],
   "action": { "default_title": "hijab-for-eye", "default_popup": "popup.html" },
   "content_scripts": [{
     "matches": ["http://*/*", "https://*/*"],

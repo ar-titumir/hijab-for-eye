@@ -2,6 +2,21 @@
 globalThis.HFEVideos = (() => {
   const entries = new Map();
   let settings, host, shadow, pending = false;
+  let pointer = null;
+  let keyboardMode = false;
+  function closePanel(entry) {
+    clearTimeout(entry.hideTimer); entry.hideTimer = null;
+    if(entry.panel) { entry.panel.hidden = true; entry.eye.setAttribute('aria-expanded','false'); }
+  }
+  function scheduleHide(video,entry) {
+    clearTimeout(entry.hideTimer); entry.hideTimer=null;
+    if(!entry.panel || entry.panel.hidden)return;
+    const rect=video.getBoundingClientRect();
+    const inside=pointer && pointer.x>=rect.left && pointer.x<=rect.right && pointer.y>=rect.top && pointer.y<=rect.top+rect.height;
+    const focused=keyboardMode && shadow.activeElement && entry.wrapper.contains(shadow.activeElement);
+    if(inside||entry.hovered||focused)return;
+    entry.hideTimer=setTimeout(()=>closePanel(entry),settings.videoHideDelay);
+  }
   const source = video => `${video.currentSrc || ''}|${video.getAttribute('src') || ''}`;
   const resize = new ResizeObserver(schedule);
   function schedule() {
@@ -17,7 +32,7 @@ globalThis.HFEVideos = (() => {
   }
   function syncPanel(entry) {
     const value = entry.value ?? settings.videoStrength;
-    entry.range.value = String(value);
+    entry.range.value = String(MediaBlur.toSlider(value,0,100));
     entry.range.setAttribute('aria-valuetext', `${value} percent blur for this video`);
     entry.output.textContent = `${value}%`;
     entry.reset.disabled = entry.value === null;
@@ -29,24 +44,32 @@ globalThis.HFEVideos = (() => {
     eye.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>';
     const panel = document.createElement('div'); panel.className = 'panel'; panel.hidden = true;
     const label = document.createElement('label'); label.textContent = 'This video only';
-    const range = document.createElement('input'); range.type = 'range'; range.min = '0'; range.max = '100'; range.step = '1';
+    const range = document.createElement('input'); range.type = 'range'; range.min = '0'; range.max = '1000'; range.step = '1';
     range.setAttribute('aria-label', 'Blur strength for this video');
     const output = document.createElement('output');
     const reset = document.createElement('button'); reset.type = 'button'; reset.className = 'reset'; reset.textContent = 'Use global setting';
     label.append(range); panel.append(label, output, reset); wrapper.append(eye, panel); shadow.append(wrapper);
     Object.assign(entry, {wrapper, eye, panel, range, output, reset});
     eye.addEventListener('click', event => {
+      for(const other of entries.values())if(other!==entry)closePanel(other);
       event.preventDefault(); event.stopPropagation(); panel.hidden = !panel.hidden;
       eye.setAttribute('aria-expanded', String(!panel.hidden));
+      scheduleHide(video,entry);
     });
+    wrapper.addEventListener('pointerenter',()=>{entry.hovered=true;scheduleHide(video,entry);});
+    wrapper.addEventListener('pointerleave',()=>{entry.hovered=false;scheduleHide(video,entry);});
+    wrapper.addEventListener('focusin',()=>scheduleHide(video,entry));
+    wrapper.addEventListener('focusout',()=>setTimeout(()=>scheduleHide(video,entry),0));
     wrapper.addEventListener('keydown', event => {
+      keyboardMode = true;
+      scheduleHide(video,entry);
       event.stopPropagation();
-      if (event.key === 'Escape') { panel.hidden = true; eye.setAttribute('aria-expanded','false'); eye.focus(); }
+      if (event.key === 'Escape') { closePanel(entry); eye.focus(); }
     });
     for (const type of ['click', 'pointerdown', 'pointerup', 'keyup']) wrapper.addEventListener(type, event => event.stopPropagation());
     range.addEventListener('input', event => {
       event.stopPropagation();
-      entry.value = Math.max(0, Math.min(100, Number(range.value)));
+      entry.value = MediaBlur.fromSlider(Number(range.value),0,100);
       video.style.setProperty('--hfe-video-local-radius', `${entry.value * .4}px`);
       video.setAttribute('data-hfe-video-override', ''); syncPanel(entry);
     });
@@ -55,23 +78,24 @@ globalThis.HFEVideos = (() => {
   }
   function update() {
     for (const [video, entry] of entries) if (!video.isConnected) {
+      closePanel(entry);
       clearOverride(video,entry); entry.wrapper?.remove(); resize.unobserve(video);
       video.removeEventListener('loadstart',entry.onLoad); video.removeEventListener('emptied',entry.onLoad);
       entries.delete(video);
     }
     for (const video of document.querySelectorAll('video')) if (!entries.has(video)) {
       const entry = {value:null, source:source(video)};
-      entry.onLoad = () => { clearOverride(video,entry); entry.source = source(video); schedule(); };
+      entry.onLoad = () => { closePanel(entry); clearOverride(video,entry); entry.source = source(video); schedule(); };
       entries.set(video,entry); resize.observe(video);
       video.addEventListener('loadstart',entry.onLoad); video.addEventListener('emptied',entry.onLoad);
     }
     for (const [video, entry] of entries) {
       const current = source(video);
-      if (current !== entry.source) { clearOverride(video,entry); entry.source = current; }
+      if (current !== entry.source) { closePanel(entry); clearOverride(video,entry); entry.source = current; }
       const rect = video.getBoundingClientRect();
       const size = settings.videoEyeSize;
       const visible = settings.enabled && settings.videos && rect.width >= size + 16 && rect.height >= size + 16 && rect.top + size + 8 > 0 && rect.top + 8 < innerHeight && rect.right > 0 && rect.left < innerWidth;
-      if (!visible) { if (entry.wrapper) entry.wrapper.hidden = true; continue; }
+      if (!visible) { closePanel(entry); if (entry.wrapper) entry.wrapper.hidden = true; continue; }
       if (!entry.wrapper) createControl(video, entry);
       entry.wrapper.hidden = false;
       entry.wrapper.style.left = `${rect.left + rect.width / 2}px`;
@@ -96,11 +120,28 @@ globalThis.HFEVideos = (() => {
       if (records.some(record => record.target !== host)) schedule();
     }).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['src','style','class','width','height','hidden']});
     document.addEventListener('scroll',schedule,true); window.addEventListener('resize',schedule);
+    document.addEventListener('pointermove',event=>{
+      keyboardMode = false;
+      pointer={x:event.clientX,y:event.clientY};
+      for(const [video,entry]of entries) {
+        const rect=video.getBoundingClientRect();
+        const inside=pointer.x>=rect.left&&pointer.x<=rect.right&&pointer.y>=rect.top&&pointer.y<=rect.top+rect.height;
+        if(inside||entry.lastInside!==inside){entry.lastInside=inside;scheduleHide(video,entry);}
+      }
+    },true);
+    document.addEventListener('pointerdown',event=>{
+      keyboardMode = false;
+      if(!event.composedPath().includes(host))for(const entry of entries.values())closePanel(entry);
+    },true);
+    document.addEventListener('keydown',event=>{if(event.key==='Tab')keyboardMode=true;},true);
+    document.addEventListener('pointerout',event=>{
+      if(!event.relatedTarget){pointer=null;for(const [video,entry]of entries){entry.hovered=false;scheduleHide(video,entry);}}
+    });
     document.addEventListener('fullscreenchange', () => {
       const fullscreen = document.fullscreenElement;
       (fullscreen && fullscreen.tagName !== 'VIDEO' ? fullscreen : document.documentElement).append(host);
       schedule();
     });
   }
-  return {apply(next) {settings = next; start(); schedule();}};
+  return {apply(next) {settings = next; start(); schedule();for(const [video,entry]of entries)scheduleHide(video,entry);}};
 })();

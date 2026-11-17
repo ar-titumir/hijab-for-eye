@@ -8,7 +8,7 @@ function setup(delayed = false) {
   const root = { style: { setProperty: (k,v) => styles[k] = v }, setAttribute: (k,v) => attrs[k] = v, removeAttribute: k => delete attrs[k] };
   const document = { documentElement: delayed ? null : root };
   let change, resolve, mutation;
-  const context = vm.createContext({ document, HFEImages: { apply() {} }, HFEVideos: { apply() {} },
+  const context = vm.createContext({ URL, document, HFEImages: { apply() {} }, HFEVideos: { apply() {} },
     MutationObserver: class { constructor(fn) { mutation = fn; } observe() {} disconnect() {} },
     chrome: { storage: { local: { get: () => new Promise(r => resolve = r) }, onChanged: { addListener: fn => change = fn } } }
   });

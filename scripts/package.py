@@ -7,7 +7,7 @@ root = Path(__file__).resolve().parents[1]
 manifest = json.loads((root / 'manifest.json').read_text(encoding='utf-8-sig'))
 version = manifest['version']
 files = {'manifest.json', 'popup.html', 'popup.js', 'popup.css', 'settings.js',
-         'README.md', 'PRIVACY.md', 'CHANGELOG.md', 'RELEASE_NOTES.md'}
+         'README.md', 'PRIVACY.md', 'CHANGELOG.md', 'RELEASE_NOTES.md', 'LICENSE'}
 for group in manifest['content_scripts']:
     files.update(group['js'])
     files.update(group['css'])
