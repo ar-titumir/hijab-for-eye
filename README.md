@@ -4,12 +4,12 @@ Blur videos and larger images while you browse, with controls you can adjust you
 
 **Created by ar-titumir** · [azizureee19@gmail.com](mailto:azizureee19@gmail.com) · [MIT License](LICENSE)
 
-**Current version: 2.3.2.** This extension is available from GitHub. It has **not** been published to the Chrome Web Store yet. You do not need Python, programming knowledge, or a paid account to install this GitHub version.
+**Current version: 2.3.3.** This extension is available from GitHub. It has **not** been published to the Chrome Web Store yet. You do not need Python, programming knowledge, or a paid account to install this GitHub version.
 
 ## 1. Download and install
 
 1. Open the [latest release page](https://github.com/ar-titumir/hijab-for-eye/releases/latest).
-2. Under **Assets**, click **hijab-for-eye-v2.3.2.zip**. Choose the extension ZIP, not the links named “Source code.”
+2. Under **Assets**, click **hijab-for-eye-v2.3.3.zip**. Choose the extension ZIP, not the links named “Source code.”
 3. Find the downloaded ZIP, usually in your **Downloads** folder.
 4. On Windows, right-click it and choose **Extract All**, then **Extract**. A ZIP is a compressed folder; the browser needs the extracted files. On macOS, double-click the ZIP to extract it.
 5. Move the extracted folder somewhere you will keep it, such as **Documents → hijab-for-eye**. Do not delete or move it after installation. Inside it you should see a file named **manifest.json**; Windows may display it simply as **manifest**.
@@ -43,7 +43,7 @@ On first installation, video blur is on at 50%. Image blur is off. Audio and pla
 ## 3. Change blur for just one video
 
 1. Make sure **Enable blur** and **Blur videos** are switched on.
-2. Open a webpage containing a video. Look for the small **eye button at the top center of the video**.
+2. Open a webpage containing a video. Move your mouse into the video area to show the small **eye button at the top center of the video**. The eye hides as soon as your mouse leaves the video; an open slider panel still follows its existing hide-delay setting.
 3. Click the eye. A small panel labeled **This video only** appears with a slider and a percentage.
 4. Drag that slider until the picture looks right. Only this video changes; other videos and your normal Video strength setting stay the same.
 5. Click the eye again, click outside its controls, or press **Escape** while using the panel to close it. It also closes after the selected delay when your mouse leaves the video and its controls. Closing the panel keeps your temporary blur amount.
@@ -60,7 +60,7 @@ Open the extension settings and click **On-video controls**, below Video strengt
 - **Slider panel opacity:** 0–100%. Controls the transparency of the panel that appears on the video. This does not change video blur.
 - **Hide after leaving video:** 0–4,000 milliseconds. Move the mouse outside the video and its controls to start this timer. Clicking outside the controls closes the panel immediately. Returning to the video cancels the countdown. Keyboard navigation keeps focused controls open. 1,000 ms means one second.
 
-At 0% opacity a control is invisible until you hover over it or reach it using the keyboard. For easy use, start around 70% eye opacity and 90% panel opacity. The eye becomes fully visible on hover or keyboard focus. A panel set above 0% keeps its chosen opacity while you adjust it.
+At 0% opacity a control is invisible until you hover over it or reach it using the keyboard. For easy use, start around 70% eye opacity and 90% panel opacity. The video eye is available only while the mouse is inside the video area; while shown, it becomes fully visible on hover or keyboard focus. A panel set above 0% keeps its chosen opacity while you adjust it.
 
 ## 4. Blur only images larger than a chosen size
 
@@ -119,7 +119,7 @@ If you already installed this extension from a local folder:
 3. Copy the extracted files and folders into the **same permanent folder you originally loaded**. Choose **Replace the files** when asked. Keep the `icons` folder too.
 4. Open `chrome://extensions` or `edge://extensions`.
 5. Find **hijab-for-eye** and click the small **Reload** button on its card (a circular arrow).
-6. Check that the card or its Details page shows **2.3.2**. Refresh your website tabs.
+6. Check that the card or its Details page shows **2.3.3**. Refresh your website tabs.
 
 Updating in the same folder normally keeps your saved settings. If you instead remove the old extension and install from another folder, you may need to choose your settings again. Do not keep two copies enabled.
 
@@ -133,8 +133,8 @@ Updating in the same folder normally keeps your saved settings. If you instead r
 | Some images stay clear | They may be below the threshold, already revealed, or excluded by a site rule. Try reducing the threshold and checking Where to blur. |
 | YouTube home thumbnails blur, but sidebar thumbnails stay clear | Sidebar thumbnails are smaller. With Height greater than 188 px, a 90 px-tall thumbnail correctly stays clear. Lower the threshold (for example, Height greater than 80 px), choose Width, or use 0 to blur all nonzero-sized supported images. This update also rescans images after YouTube navigation and supports images inside open shadow roots. |
 | Small icons or logos are blurred | Increase the image size threshold or switch off Blur images. |
-| I cannot find the new controls | Reload the extension, verify version 2.3.2, and refresh the website. Scroll the popup; video appearance settings are inside On-video controls. |
-| The video eye is missing | Enable Blur videos, increase eye opacity, and try a normal-sized in-page player. Very small, off-screen, fullscreen, or custom players can hide the controls. |
+| I cannot find the new controls | Reload the extension, verify version 2.3.3, and refresh the website. Scroll the popup; video appearance settings are inside On-video controls. |
+| The video eye is missing | Move your mouse inside the video area. Enable Blur videos, increase eye opacity, and try a normal-sized in-page player. Very small, off-screen, fullscreen, or custom players can hide the controls. |
 | The video adjustment reset | The page may have refreshed or loaded a new media source. Temporary adjustments do not persist through those changes. |
 | Blur is slow on a busy page | Lower blur strength or disable image blur. Large pages with many media elements can use more computer resources. |
 | The extension does not work in a private window | Extensions are normally disabled there. If you want it there, enable Allow in Incognito / Allow in InPrivate in the extension's Details page. |

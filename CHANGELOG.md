@@ -1,5 +1,12 @@
 # Version history
 
+## v2.3.3 - November 17, 2026
+
+- Show each video blur-adjustment eye only while the pointer is inside that video area. Hide it when the pointer leaves or the browser window loses focus.
+- Keep open slider panels in place and retain their existing dismissal delay.
+- Add regression coverage for initial hidden state, pointer movement between videos, leaving the page, and panel dismissal.
+
+
 ## v2.3.2 - November 17, 2026
 
 - Use one accelerating exponential curve for every slider: slow increases at the start, gradually faster increases toward the maximum. Includes opacity and temporary per-video blur.
