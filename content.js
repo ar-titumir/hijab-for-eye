@@ -7,6 +7,9 @@
     const root = document.documentElement;
     if (!root) return;
     HFEImages.apply(settings);
+    HFEVideos.apply(settings);
+    if (settings.enabled && settings.videos) root.setAttribute('data-hfe-video-controls', 'on');
+    else root.removeAttribute('data-hfe-video-controls');
     for (const [kind, strength] of [['videos', 'videoStrength'], ['images', 'imageStrength']]) {
       const singular = kind === 'videos' ? 'video' : 'image';
       root.style.setProperty(`--media-blur-${singular}-radius`, `${settings[strength] * 0.4}px`);

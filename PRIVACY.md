@@ -12,6 +12,8 @@ The extension stores only its settings (enabled/disabled, video and image toggle
 
 ## Website access
 
+Video eye size, video eye opacity, and video slider panel opacity are also stored locally as preferences. Temporary per-video blur adjustments and source identifiers exist only in the page's memory; they are not saved to extension storage or transmitted.
+
 The extension runs content scripts on HTTP and HTTPS pages and matching embedded frames to apply local CSS blur. This access is used only for the visual filtering feature. Website content is not sent to the developer or any third party.
 
 Users can turn the extension off, adjust its settings, restrict site access through the browser's extension management page, or uninstall it.

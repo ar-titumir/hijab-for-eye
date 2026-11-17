@@ -4,3 +4,6 @@ html[data-media-blur-videos="on"] video {
 html[data-media-blur-images="on"] [data-hfe-image-blurred] {
   filter: blur(var(--media-blur-image-radius, 20px)) !important;
 }
+html[data-hfe-video-controls="on"] video[data-hfe-video-override] {
+  filter: blur(var(--hfe-video-local-radius, 0px)) !important;
+}

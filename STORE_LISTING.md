@@ -15,6 +15,7 @@ Features:
 - Independent 0–100% blur controls for videos and images.
 - Filter images by displayed width, height, or area with an adjustable threshold.
 - Reveal individual blurred images using a centered eye button with adjustable opacity.
+- Open the eye button at the top of a video to adjust its blur temporarily without affecting other videos. Customize the eye size, eye opacity, and slider panel opacity.
 - Enable videos, images, or both.
 - Saved local preferences applied across supported websites and open tabs.
 - Works with standard HTML videos, images, animated GIFs, and dynamically added media.
@@ -37,7 +38,7 @@ Limitations: browser internal pages, extension stores, CSS background images, ca
 ## Privacy declarations
 Single purpose: Let users adjust visual blur on video and image elements while browsing supported websites.
 
-Storage justification: Save the user's on/off preference, selected media types, blur strengths, image size filter and threshold, and eye icon opacity on the device across browser sessions.
+Storage justification: Save the user's on/off preference, selected media types, blur strengths, image size filter and threshold, image eye opacity, video eye size and opacity, and video slider panel opacity on the device across browser sessions. Temporary per-video blur changes are kept in page memory only.
 
 Website access justification: Content scripts run on HTTP and HTTPS websites and matching embedded frames to apply the user-selected CSS blur to media elements. Access is needed across sites because this is a general-purpose media blur extension. No page content is collected or transmitted.
 
@@ -48,6 +49,6 @@ User data collection: None. Only local extension preferences are stored.
 ## Submission steps
 1. Register or sign in at https://chrome.google.com/webstore/devconsole. New developers must accept Google's agreement and pay the one-time registration fee. Complete any requested account verification yourself.
 2. Test the extension on real sites, then capture at least one genuine 1280 × 800 screenshot showing its controls and effect.
-3. Add a new item and upload `hijab-for-eye-chrome-web-store-v2.0.1.zip` (manifest is at the ZIP root).
+3. Add a new item and upload `hijab-for-eye-v2.2.0.zip` (manifest is at the ZIP root).
 4. Complete the listing and privacy fields using the text above, add the icon and screenshot, and select Public distribution.
 5. Review the final declarations, then submit for Google's review. It is not searchable in the store until Google approves and publishes it.

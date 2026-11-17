@@ -10,6 +10,9 @@ legend { font-size: 13px; margin-bottom: 10px; }
 .segments input:focus-visible + span { outline: 2px solid white; }
 .hint { font-size: 11px; color: #aeb9ce; line-height: 1.5; margin: 6px 0; }
 #thresholdValue { font-size: 17px; }
+details { margin-top: 18px; }
+summary { cursor: pointer; font-size: 13px; color: #bac7ff; }
+details output { font-size: 17px; }
 * { box-sizing: border-box; }
 body { margin: 0; width: 320px; }
 main { padding: 24px; }

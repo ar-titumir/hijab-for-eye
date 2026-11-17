@@ -1,17 +1,23 @@
-# hijab-for-eye v2.0.0
+# hijab-for-eye v2.2.0 — Per-video blur controls
 
-Adjust video and image blur across websites in Chrome and Microsoft Edge.
+## New features
 
-- Independent 0–100% sliders for videos and images.
-- Category toggles and a master pause switch.
-- Settings saved locally and applied across open tabs.
-- Support for standard media elements, dynamically loaded media, and matching embedded frames.
-- No analytics or external dependencies.
+- Eye button at the top center of each supported video.
+- Click the eye to open a 0–100% blur slider that changes only that video.
+- Customize the video eye size (20–80 px), eye opacity (0–100%), and slider panel opacity (0–100%) in the extension settings.
+- Restore a video's normal blur with **Use global setting**. Close its panel with the eye button or Escape.
+- Temporary blur resets when new media loads, the video source changes, or the page reloads. Other videos and saved global blur remain unchanged.
 
-## Install
+## Documentation
 
-Download `hijab-for-eye-v2.0.0.zip` and extract it. Open `chrome://extensions` or `edge://extensions`, enable Developer mode, choose **Load unpacked**, and select the extracted `hijab-for-eye` folder. Disable older versions of the blur extension and reload existing tabs.
+The README now includes plain-language download, installation, updating, and usage instructions for Chrome and Edge, examples of image thresholds, a troubleshooting table, privacy information, and known limitations. Previous image filtering and click-to-reveal features remain available.
 
-## Known limitations
+## Download and install
 
-Browser-protected pages, CSS background images, canvas/WebGL media, shadow DOM media, and native picture-in-picture are not supported. Blur is a visual effect, not guaranteed concealment. Live browser testing has not been performed; automated settings lifecycle and syntax checks pass.
+Download **hijab-for-eye-v2.2.0.zip** below and extract it into a permanent folder. In Chrome open `chrome://extensions`; in Edge open `edge://extensions`. Enable **Developer mode**, click **Load unpacked**, and select the extracted folder containing `manifest.json`.
+
+To update an existing installation, replace the files in its existing folder, click **Reload** on its extension card, then refresh website tabs. See the README for the full walkthrough.
+
+## Validation and limitations
+
+Automated tests pass for stored settings, image thresholds and reveals, independent video blur overrides, zero blur, global-setting changes, resets, size and opacity, keyboard closing, and cleanup. Real-browser visual testing remains outstanding. Custom overlays and native video fullscreen may hide controls. This release is on GitHub and is not published to the Chrome Web Store.

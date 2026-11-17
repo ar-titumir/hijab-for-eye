@@ -19,6 +19,16 @@
       <div class="level-row"><label for="videoStrength">Video strength</label><output id="videoValue" for="videoStrength">50%</output></div>
       <input id="videoStrength" type="range" min="0" max="100" step="1" value="50" disabled>
       <div class="scale"><span>Clear</span><span>Softest</span></div>
+      <details>
+        <summary>On-video controls</summary>
+        <div class="level-row"><label for="videoEyeSize">Eye size</label><output id="videoEyeSizeValue" for="videoEyeSize">36 px</output></div>
+        <input id="videoEyeSize" type="range" min="20" max="80" value="36" disabled>
+        <div class="level-row"><label for="videoEyeOpacity">Eye opacity</label><output id="videoEyeOpacityValue" for="videoEyeOpacity">70%</output></div>
+        <input id="videoEyeOpacity" type="range" min="0" max="100" value="70" disabled>
+        <div class="level-row"><label for="videoPanelOpacity">Slider panel opacity</label><output id="videoPanelOpacityValue" for="videoPanelOpacity">90%</output></div>
+        <input id="videoPanelOpacity" type="range" min="0" max="100" value="90" disabled>
+        <p class="hint">Click the eye at the top of a video to adjust only that video. Temporary blur resets when new media loads or the page reloads. Hover or focus makes invisible controls visible.</p>
+      </details>
     </section>
     <section aria-label="Image blur">
       <label class="media-label"><input id="images" type="checkbox" disabled> Blur images</label>

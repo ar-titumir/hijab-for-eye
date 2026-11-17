@@ -5,6 +5,9 @@ const status = document.getElementById('status');
 let writes = Promise.resolve();
 let updateId = 0;
 function render() {
+  for (const key of ['videoEyeSize', 'videoEyeOpacity', 'videoPanelOpacity']) {
+    document.getElementById(`${key}Value`).textContent = `${controls[key].value}${key === 'videoEyeSize' ? ' px' : '%'}`;
+  }
   for (const kind of ['video', 'image']) {
     const control = controls[`${kind}Strength`];
     document.getElementById(`${kind}Value`).textContent = `${control.value}%`;
